@@ -1,0 +1,40 @@
+name: Ejecutar scripts diarios
+
+on:
+  schedule:
+    - cron: '5 7 * * *'  # A las 07:05 UTC todos los días
+  workflow_dispatch:
+
+jobs:
+  actualizar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clonar el repositorio
+        uses: actions/checkout@v3
+
+      - name: Instalar Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Instalar dependencias
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Ejecutar scraper Investing
+        run: python scrapper_invest.py
+
+      - name: Esperar 5 minutos
+        run: sleep 300
+
+      - name: Ejecutar análisis de crecimiento
+        run: python Crecimiento.py
+
+      - name: Subir archivos actualizados
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add data/*.csv empresa_data/*.csv analisis_crecimiento.csv
+          git commit -m "📈 Datos actualizados automáticamente"
+          git push
