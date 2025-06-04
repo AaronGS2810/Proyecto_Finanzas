@@ -1,0 +1,23 @@
+# Entorno virtual
+venv/
+.env/
+venv
+
+# Archivos de configuración de sistema
+.DS_Store
+Thumbs.db
+
+# Archivos temporales y cachés
+__pycache__/
+*.py[cod]
+*.log
+
+# Archivos de Jupyter
+.ipynb_checkpoints/
+
+# # Archivos CSV diarios y de empresa (opcionales)
+# data/*.csv
+# empresa_data/*.csv
+
+# # Otros (si usas VSCode, etc.)
+# .vscode/
