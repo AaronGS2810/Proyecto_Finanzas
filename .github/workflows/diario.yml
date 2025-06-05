@@ -31,13 +31,14 @@ jobs:
       - name: Ejecutar análisis de crecimiento
         run: python Crecimiento.py
 
+      - name: Ver archivos generados
+        run: ls -R
+
       - name: Subir archivos actualizados
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
-          git add data/*.csv empresa_data/*.csv analisis/*.csv
-          - name: Ver archivos generados
-            run: ls -R
-
-          git commit -m "📈 Datos actualizados automáticamente"
+          git add .
+          git commit -m "📈 Datos actualizados automáticamente" || echo "No hay cambios que commitear"
           git push
+
