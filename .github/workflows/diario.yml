@@ -36,5 +36,8 @@ jobs:
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
           git add data/*.csv empresa_data/*.csv analisis/*.csv
+          - name: Ver archivos generados
+            run: ls -R
+
           git commit -m "📈 Datos actualizados automáticamente"
           git push
